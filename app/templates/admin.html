@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - Vault Command Center{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/flask-forms.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section admin-panel" aria-labelledby="admin-heading">
+        <h2 id="admin-heading">> VAULT COMMAND CENTER</h2>
+        <div class="terminal-output">
+            <p>ADMIN ACCESS GRANTED... <span class="blink" aria-hidden="true">_</span></p>
+            <p>> CLEARANCE LEVEL: OVERSEER</p>
+            <p>> TIMESTAMP: {{ terminal_time() }}</p>
+            
+            <!-- Site Statistics -->
+            <div class="admin-section">
+                <h3>> SITE STATISTICS</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">{{ stats.total_visits }}</div>
+                        <div class="stat-label">Total Visits</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ stats.unique_visitors }}</div>
+                        <div class="stat-label">Unique Visitors</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ messages|length }}</div>
+                        <div class="stat-label">Messages Received</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ messages|selectattr('is_read', 'equalto', false)|list|length }}</div>
+                        <div class="stat-label">Unread Messages</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Visitor Chart -->
+            <div class="admin-section">
+                <h3>> VISITOR ACTIVITY (LAST 7 DAYS)</h3>
+                <div class="chart-container">
+                    <div class="ascii-chart">
+                        {% for date, count in daily_stats.items() %}
+                        <div class="chart-row">
+                            <span class="chart-date">{{ date }}</span>
+                            <span class="chart-bar">
+                                {% for i in range(count) %}▓{% endfor %}
+                                {% if count == 0 %}░{% endif %}
+                            </span>
+                            <span class="chart-value">{{ count }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Visitors -->
+            <div class="admin-section">
+                <h3>> RECENT VISITORS</h3>
+                <div class="visitor-log">
+                    {% for visitor in recent_visitors[:10] %}
+                    <div class="log-entry">
+                        <span class="log-time">{{ visitor.timestamp.strftime('%H:%M:%S') }}</span>
+                        <span class="log-ip">{{ visitor.ip_address }}</span>
+                        <span class="log-page">{{ visitor.page_visited }}</span>
+                        {% if visitor.referrer %}
+                        <span class="log-referrer">from {{ visitor.referrer }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Contact Messages -->
+            <div class="admin-section">
+                <h3>> INCOMING TRANSMISSIONS</h3>
+                <div class="message-list">
+                    {% for message in messages[:10] %}
+                    <div class="message-item {% if not message.is_read %}unread{% endif %}">
+                        <div class="message-header">
+                            <span class="message-sender">{{ message.name }} ({{ message.email }})</span>
+                            <span class="message-timestamp">{{ message.timestamp.strftime('%Y-%m-%d %H:%M') }}</span>
+                        </div>
+                        <div class="message-subject">{{ message.subject }}</div>
+                        <div class="message-content">
+                            {{ message.message[:200] }}{% if message.message|length > 200 %}...{% endif %}
+                        </div>
+                        <div class="message-actions">
+                            {% if not message.is_read %}
+                            <a href="{{ url_for('main.admin', code=request.args.get('code'), action='mark_read', id=message.id) }}" class="admin-link">Mark Read</a>
+                            {% endif %}
+                            <a href="{{ url_for('main.admin', code=request.args.get('code'), action='view', id=message.id) }}" class="admin-link">View Full</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="admin-section">
+                <h3>> SYSTEM STATUS</h3>
+                <div class="system-info">
+                    <div class="status-item">
+                        <span class="status-label">Server Status:</span>
+                        <span class="status-value online">ONLINE</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Database:</span>
+                        <span class="status-value online">CONNECTED</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Last Update:</span>
+                        <span class="status-value">{{ stats.last_updated.strftime('%Y-%m-%d %H:%M:%S') if stats.last_updated else 'N/A' }}</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Uptime:</span>
+                        <span class="status-value">99.9%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="admin-section">
+                <h3>> QUICK ACTIONS</h3>
+                <div class="action-buttons">
+                    <a href="{{ url_for('main.api_status') }}" class="terminal-submit" target="_blank">View API Status</a>
+                    <a href="{{ url_for('main.api_stats') }}" class="terminal-submit" target="_blank">View Stats API</a>
+                    <a href="{{ url_for('main.index') }}" class="terminal-submit">Return to Terminal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-refresh stats every 30 seconds
+    setInterval(() => {
+        fetch('/api/stats')
+            .then(response => response.json())
+            .then(data => {
+                console.log('> Stats updated:', data);
+            })
+            .catch(error => console.log('> Stats update failed:', error));
+    }, 30000);
+    
+    // Add click effects to stat cards
+    document.querySelectorAll('.stat-card').forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+    });
+});
+</script>
+{% endblock %} 

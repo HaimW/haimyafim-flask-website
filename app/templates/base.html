@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}Haim Yafim's personal website - Vault-Tec terminal interface{% endblock %}">
+    <meta name="author" content="Haim Yafim">
+    <meta name="keywords" content="Haim Yafim, developer, portfolio, fallout, vault-tec">
+    
+    <title>{% block title %}{{ config.SITE_NAME }}{% endblock %}</title>
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="{{ url_for('static', filename='css/styles.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', filename='css/vault-boy.css') }}" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vault-boy.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fallout-pixels.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix-effects.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23001100'/><rect x='8' y='8' width='16' height='16' fill='%2300ff00'/></svg>">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <div class="matrix-rain" id="matrix-rain"></div>
+    
+    <!-- Cyberpunk Grid Overlay -->
+    <div class="cyber-grid"></div>
+    
+    <!-- Binary Background -->
+    <div class="binary-bg"></div>
+    
+    <!-- Neon Wall Lighting Effect - Left Side -->
+    <div class="wall-texture"></div>
+    <div class="neon-wall-light"></div>
+    <div class="neon-reflection"></div>
+    <div class="neon-tube"></div>
+    
+    <!-- Neon Wall Lighting Effect - Right Side -->
+    <div class="wall-texture-right"></div>
+    <div class="neon-wall-light-right"></div>
+    <div class="neon-reflection-right"></div>
+    <div class="neon-tube-right"></div>
+    
+    <!-- CRT Effect -->
+    <div class="crt-effect"></div>
+    
+    <!-- Scan Lines -->
+    <div class="scan-lines"></div>
+
+    <header role="banner">
+        <div class="vault-boy" aria-label="Vault Boy pixel art character">
+            <!-- Vault Boy pixel art divs -->
+            {% for i in range(1, 21) %}
+            <div class="pixel-{{ i }}" aria-hidden="true"></div>
+            {% endfor %}
+        </div>
+        <div class="header-content">
+            <h1>VAULT-OS: Haim Yafim's Terminal</h1>
+            <div class="pip-boy-ui" aria-hidden="true">
+                <div class="pip-boy-stats">
+                    <span class="stat">PWR: 100%</span>
+                    <span class="stat">RAD: 0</span>
+                    <span class="stat">HP: 100/100</span>
+                </div>
+            </div>
+        </div>
+        <div class="fallout-symbols" aria-hidden="true">
+            <div class="symbol nuke-symbol"></div>
+            <div class="symbol gear-symbol"></div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <main role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2275 Haim Yafim. Vault-Tec Systems Online.</p>
+        <p class="system-status">
+            {% if system_status %}
+            > SYSTEM STATUS: {{ system_status.status_type.upper() }} | {{ terminal_time() }}
+            {% else %}
+            > SYSTEM STATUS: OPERATIONAL | {{ terminal_time() }}
+            {% endif %}
+        </p>
+        <p class="accessibility-note">
+            <small>Built with accessibility in mind. <a href="#" class="accessibility-toggle">Toggle high contrast</a></small>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Analytics (if configured) -->
+    {% if config.GOOGLE_ANALYTICS_ID %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_ID }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ config.GOOGLE_ANALYTICS_ID }}');
+    </script>
+    {% endif %}
+</body>
+</html> 

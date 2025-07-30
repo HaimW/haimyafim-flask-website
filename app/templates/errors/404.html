@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - Access Denied{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section" aria-labelledby="error-heading">
+        <h2 id="error-heading">> ERROR 404: ACCESS DENIED</h2>
+        <div class="terminal-output">
+            <p>SCANNING FOR REQUESTED RESOURCE... <span class="blink" aria-hidden="true">_</span></p>
+            <p>> ERROR: RESOURCE NOT FOUND IN VAULT DATABASE</p>
+            <p>> LOCATION: {{ request.url }}</p>
+            <p>> TIMESTAMP: {{ terminal_time() }}</p>
+            
+            <div class="error-container">
+                <div class="ascii-art">
+                    <pre>
+    ⚠️  WARNING  ⚠️
+    
+    ╔══════════════════════╗
+    ║   ACCESS RESTRICTED  ║
+    ║                      ║
+    ║   VAULT-TEC SYSTEMS  ║
+    ║   SECURITY PROTOCOL  ║
+    ╚══════════════════════╝
+                    </pre>
+                </div>
+                
+                <div class="error-message">
+                    <p><strong>> POSSIBLE CAUSES:</strong></p>
+                    <ul class="protocol-list">
+                        <li>• Resource has been moved to secure archives</li>
+                        <li>• Insufficient clearance level for access</li>
+                        <li>• URL path corrupted during transmission</li>
+                        <li>• Resource destroyed in nuclear event</li>
+                    </ul>
+                </div>
+                
+                <div class="error-actions">
+                    <p><strong>> RECOMMENDED ACTIONS:</strong></p>
+                    <div class="action-buttons">
+                        <a href="{{ url_for('main.index') }}" class="terminal-submit">Return to Main Terminal</a>
+                        <a href="{{ url_for('main.contact') }}" class="terminal-submit">Report Issue</a>
+                        <a href="javascript:history.back()" class="terminal-submit">Previous Location</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add some glitch effects for the 404 page
+document.addEventListener('DOMContentLoaded', function() {
+    const errorSection = document.querySelector('.section');
+    
+    // Random glitch effect every few seconds
+    setInterval(() => {
+        if (Math.random() < 0.3) {
+            errorSection.classList.add('glitch');
+            setTimeout(() => {
+                errorSection.classList.remove('glitch');
+            }, 500);
+        }
+    }, 3000);
+    
+    // Add some terminal typing to the error message
+    setTimeout(() => {
+        const messages = [
+            '> Attempting alternative routes...',
+            '> Checking backup systems...',
+            '> All systems functional, resource not found'
+        ];
+        
+        let index = 0;
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'diagnostic-messages';
+        document.querySelector('.terminal-output').appendChild(messageContainer);
+        
+        function showNextMessage() {
+            if (index < messages.length) {
+                const p = document.createElement('p');
+                p.textContent = messages[index];
+                p.style.opacity = '0';
+                messageContainer.appendChild(p);
+                
+                setTimeout(() => {
+                    p.style.transition = 'opacity 0.5s';
+                    p.style.opacity = '1';
+                }, 100);
+                
+                index++;
+                setTimeout(showNextMessage, 1500);
+            }
+        }
+        
+        showNextMessage();
+    }, 2000);
+});
+</script>
+{% endblock %} 

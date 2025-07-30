@@ -1,0 +1,445 @@
+/* ===== FALLOUT PIXEL ART ICONS ===== */
+
+.pixel-icon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.pixel-icon div {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: var(--primary-color);
+}
+
+/* Email Icon - Envelope */
+.email-icon div:nth-child(1) { top: 2px; left: 1px; width: 14px; height: 1px; }
+.email-icon div:nth-child(2) { top: 3px; left: 0px; width: 1px; height: 10px; }
+.email-icon div:nth-child(3) { top: 3px; left: 15px; width: 1px; height: 10px; }
+.email-icon div:nth-child(4) { top: 13px; left: 1px; width: 14px; height: 1px; }
+.email-icon div:nth-child(5) { top: 3px; left: 1px; width: 6px; height: 1px; }
+.email-icon div:nth-child(6) { top: 4px; left: 2px; width: 4px; height: 1px; }
+.email-icon div:nth-child(7) { top: 5px; left: 3px; width: 2px; height: 1px; }
+.email-icon div:nth-child(8) { top: 3px; left: 9px; width: 6px; height: 1px; }
+.email-icon div:nth-child(9) { top: 4px; left: 10px; width: 4px; height: 1px; }
+.email-icon div:nth-child(10) { top: 5px; left: 11px; width: 2px; height: 1px; }
+
+.email-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background: 
+        /* Top edge */ linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) 100%) 0 0/100% 1px no-repeat,
+        /* Bottom edge */ linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) 100%) 0 100%/100% 1px no-repeat,
+        /* Left edge */ linear-gradient(to bottom, var(--primary-color) 0%, var(--primary-color) 100%) 0 0/1px 100% no-repeat,
+        /* Right edge */ linear-gradient(to bottom, var(--primary-color) 0%, var(--primary-color) 100%) 100% 0/1px 100% no-repeat,
+        /* Envelope flap */ linear-gradient(135deg, transparent 40%, var(--primary-color) 41%, var(--primary-color) 59%, transparent 60%) 0 0/100% 40% no-repeat;
+}
+
+/* X (Twitter) Icon */
+.x-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background: 
+        /* X shape */
+        linear-gradient(45deg, transparent 35%, var(--primary-color) 35%, var(--primary-color) 65%, transparent 65%),
+        linear-gradient(-45deg, transparent 35%, var(--primary-color) 35%, var(--primary-color) 65%, transparent 65%);
+    background-size: 16px 16px;
+    background-position: center;
+}
+
+/* LinkedIn Icon - Professional Network Symbol */
+.linkedin-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: 
+        /* L shape */
+        linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) 25%, transparent 25%) 0 0/100% 100%,
+        linear-gradient(to bottom, var(--primary-color) 0%, var(--primary-color) 100%) 0 75%/25% 25%;
+    border: 1px solid var(--primary-color);
+}
+
+/* ===== FALLOUT UI SYMBOLS ===== */
+
+/* Nuclear Symbol */
+.nuke-symbol {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 0 10px;
+}
+
+.nuke-symbol::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 0 2px var(--primary-color),
+        0 -8px 0 -2px var(--primary-color),
+        6px 4px 0 -2px var(--primary-color),
+        -6px 4px 0 -2px var(--primary-color);
+}
+
+.nuke-symbol::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+/* Gear Symbol */
+.gear-symbol {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 0 10px;
+}
+
+.gear-symbol::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: 
+        /* Gear teeth */
+        radial-gradient(circle at 50% 0%, var(--primary-color) 30%, transparent 30%),
+        radial-gradient(circle at 100% 50%, var(--primary-color) 30%, transparent 30%),
+        radial-gradient(circle at 50% 100%, var(--primary-color) 30%, transparent 30%),
+        radial-gradient(circle at 0% 50%, var(--primary-color) 30%, transparent 30%);
+    background-size: 4px 4px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+}
+
+.gear-symbol::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 4px;
+    height: 4px;
+    background: var(--bg-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+}
+
+/* ===== PIP-BOY UI ELEMENTS ===== */
+
+.pip-boy-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: auto;
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.pip-boy-stats {
+    display: flex;
+    gap: 15px;
+    padding: 5px 10px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    font-family: var(--font-main);
+}
+
+.stat {
+    color: var(--primary-color);
+    text-shadow: 0 0 3px var(--primary-color);
+    font-weight: bold;
+    position: relative;
+}
+
+.stat::before {
+    content: '■';
+    margin-right: 3px;
+    opacity: 0.6;
+}
+
+/* Health bar animation */
+.stat:first-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, var(--primary-color) 50%, transparent 100%);
+    opacity: 0.3;
+    animation: health-pulse 3s ease-in-out infinite;
+}
+
+@keyframes health-pulse {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+}
+
+/* ===== CONTACT GRID LAYOUT ===== */
+
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 2px solid var(--primary-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(0, 255, 0, 0.05);
+    border-left-width: 4px;
+    transform: translateX(5px);
+}
+
+/* Generate pixel art icon elements */
+.email-icon { position: relative; }
+.email-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background: 
+        conic-gradient(from 0deg at 50% 30%, 
+            transparent 0deg, 
+            var(--primary-color) 0deg, 
+            var(--primary-color) 45deg, 
+            transparent 45deg,
+            transparent 315deg,
+            var(--primary-color) 315deg,
+            var(--primary-color) 360deg,
+            transparent 360deg),
+        linear-gradient(to bottom, var(--primary-color) 1px, transparent 1px, transparent 100%, var(--primary-color) 100%);
+    background-size: 16px 8px, 16px 16px;
+    background-position: 0 0, 0 0;
+    background-repeat: no-repeat;
+}
+
+/* ===== HEADER ENHANCEMENTS ===== */
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.fallout-symbols {
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+}
+
+/* Animations for symbols */
+.nuke-symbol {
+    animation: nuke-glow 4s ease-in-out infinite alternate;
+}
+
+.gear-symbol {
+    animation: gear-spin 8s linear infinite;
+}
+
+@keyframes nuke-glow {
+    0% { 
+        filter: drop-shadow(0 0 2px var(--primary-color));
+        transform: scale(1);
+    }
+    100% { 
+        filter: drop-shadow(0 0 8px var(--primary-color));
+        transform: scale(1.05);
+    }
+}
+
+@keyframes gear-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== MANTRA STYLING ===== */
+
+.mantra-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(0, 255, 0, 0.02);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mantra-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    animation: mantra-scan 3s ease-in-out;
+}
+
+.mantra-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+    font-family: var(--font-main);
+    letter-spacing: 1px;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+    min-height: 1.5em;
+    position: relative;
+}
+
+.typing-cursor {
+    color: var(--primary-color);
+    animation: cursor-blink 1s infinite;
+    font-weight: bold;
+}
+
+.mantra-complete .typing-cursor {
+    display: none;
+}
+
+.mantra-glow {
+    animation: text-glow 2s ease-in-out;
+}
+
+/* Animations */
+@keyframes mantra-scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes text-glow {
+    0% { text-shadow: 0 0 8px var(--primary-color); }
+    50% { text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color); }
+    100% { text-shadow: 0 0 8px var(--primary-color); }
+}
+
+/* Special styling for the sun symbols */
+.sun-symbol {
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+    font-size: 1.2em;
+    animation: sun-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes sun-pulse {
+    0% { 
+        text-shadow: 0 0 10px #ffd700;
+        transform: scale(1);
+    }
+    100% { 
+        text-shadow: 0 0 15px #ffd700, 0 0 25px #ffa500;
+        transform: scale(1.05);
+    }
+}
+
+/* ===== RESPONSIVE PIXEL ART ===== */
+
+@media (max-width: 768px) {
+    .pixel-icon {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .nuke-symbol,
+    .gear-symbol {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .pip-boy-stats {
+        gap: 10px;
+        font-size: 0.6rem;
+    }
+    
+    .contact-grid {
+        gap: 8px;
+    }
+    
+    .mantra-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fallout-symbols {
+        display: none;
+    }
+    
+    .pip-boy-ui {
+        font-size: 0.5rem;
+    }
+    
+    .contact-item {
+        padding: 6px;
+    }
+    
+    .mantra-text {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .mantra-container {
+        padding: 0.75rem;
+    }
+}
+
+/* Accessibility for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .mantra-container::before,
+    .typing-cursor,
+    .mantra-glow,
+    .sun-symbol {
+        animation: none;
+    }
+    
+    .typing-cursor {
+        display: none;
+    }
+} 

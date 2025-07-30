@@ -1,0 +1,315 @@
+/* ===== FLASK FORM STYLING ===== */
+
+/* Flash Messages */
+.flash-messages {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.flash-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    background: var(--bg-color);
+    font-family: var(--font-main);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.flash-success {
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+    color: #00ff00;
+}
+
+.flash-error {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.05);
+    color: #ff4444;
+}
+
+.flash-warning {
+    border-color: #ffaa00;
+    background: rgba(255, 170, 0, 0.05);
+    color: #ffaa00;
+}
+
+.flash-info {
+    border-color: #00bfff;
+    background: rgba(0, 191, 255, 0.05);
+    color: #00bfff;
+}
+
+/* Terminal Form Styling */
+.contact-form-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+.terminal-form {
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.terminal-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.terminal-input,
+.terminal-textarea,
+.terminal-select {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 3px;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.terminal-input:focus,
+.terminal-textarea:focus,
+.terminal-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.terminal-textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: var(--font-main);
+    line-height: 1.4;
+}
+
+.terminal-select {
+    cursor: pointer;
+}
+
+.terminal-submit {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-submit:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+.terminal-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Error Messages */
+.error-messages {
+    margin-top: 0.5rem;
+}
+
+.error-message {
+    color: #ff4444;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    margin: 0.25rem 0;
+    text-shadow: 0 0 5px #ff4444;
+}
+
+/* Transmission Info */
+.transmission-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(0, 255, 0, 0.02);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 3px;
+}
+
+.protocol-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.protocol-list li {
+    padding: 0.25rem 0;
+    color: rgba(0, 255, 0, 0.8);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+}
+
+/* Project Items */
+.project-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 2px solid var(--primary-color);
+    border-radius: 3px;
+}
+
+.api-item {
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 2px solid #00bfff;
+    border-radius: 3px;
+}
+
+/* Admin Panel Styling */
+.admin-panel {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.stat-card {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(0, 255, 0, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Message List */
+.message-list {
+    margin: 1rem 0;
+}
+
+.message-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    transition: all var(--transition-speed) ease;
+}
+
+.message-item:hover {
+    border-color: var(--primary-color);
+    background: rgba(0, 255, 0, 0.02);
+}
+
+.message-item.unread {
+    border-color: #ffaa00;
+    background: rgba(255, 170, 0, 0.05);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.message-sender {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.message-timestamp {
+    color: rgba(0, 255, 0, 0.6);
+    font-size: 0.8rem;
+}
+
+.message-subject {
+    color: #00bfff;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.message-content {
+    color: rgba(0, 255, 0, 0.9);
+    line-height: 1.4;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(0, 255, 0, 0.1);
+    margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flash-messages {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .terminal-submit {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+} 

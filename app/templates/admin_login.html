@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - Access Control{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/flask-forms.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section" aria-labelledby="access-heading">
+        <h2 id="access-heading">> ACCESS CONTROL TERMINAL</h2>
+        <div class="terminal-output">
+            <p>SECURITY PROTOCOL INITIATED... <span class="blink" aria-hidden="true">_</span></p>
+            <p>> WARNING: UNAUTHORIZED ACCESS PROHIBITED</p>
+            <p>> ENTER AUTHORIZATION CODE TO PROCEED</p>
+            
+            <div class="contact-form-container">
+                <form method="POST" class="terminal-form">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        {{ form.access_code.label(class="terminal-label") }}
+                        {{ form.access_code(class="terminal-input", type="password", placeholder="Enter Vault-Tec access code...") }}
+                        {% if form.access_code.errors %}
+                            <div class="error-messages">
+                                {% for error in form.access_code.errors %}
+                                <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.submit(class="terminal-submit") }}
+                    </div>
+                </form>
+                
+                <div class="security-notice">
+                    <p><strong>> SECURITY NOTICE:</strong></p>
+                    <ul class="protocol-list">
+                        <li>• All access attempts are logged and monitored</li>
+                        <li>• Multiple failed attempts will trigger security lockdown</li>
+                        <li>• Authorized personnel only beyond this point</li>
+                        <li>• Contact system administrator for access requests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.terminal-form');
+    const accessCodeInput = document.querySelector('#access_code');
+    
+    // Add typing effect to access code input
+    accessCodeInput.addEventListener('input', function() {
+        this.style.borderColor = 'var(--primary-color)';
+        this.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.3)';
+        
+        setTimeout(() => {
+            this.style.borderColor = '';
+            this.style.boxShadow = '';
+        }, 200);
+    });
+    
+    // Form submission effect
+    form.addEventListener('submit', function(e) {
+        const submitBtn = form.querySelector('.terminal-submit');
+        submitBtn.textContent = '> AUTHENTICATING...';
+        submitBtn.disabled = true;
+        
+        // Add scanning effect
+        document.body.style.animation = 'scan-effect 0.5s ease-in-out';
+    });
+});
+</script>
+
+<style>
+@keyframes scan-effect {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2) saturate(1.2); }
+}
+</style>
+{% endblock %} 

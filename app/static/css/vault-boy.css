@@ -1,0 +1,186 @@
+/* ===== VAULT BOY PIXEL ART ===== */
+.vault-boy {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    background: transparent;
+    position: relative;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.vault-boy:hover {
+    transform: scale(1.1);
+}
+
+.vault-boy div {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--primary-color, #00ff00);
+    box-shadow: 0 0 2px var(--glow-color, rgba(0, 255, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+/* Vault Boy pixel art coordinates - Head outline */
+.vault-boy .pixel-1 { top: 8px; left: 8px; }
+.vault-boy .pixel-2 { top: 8px; left: 10px; }
+.vault-boy .pixel-3 { top: 8px; left: 12px; }
+.vault-boy .pixel-4 { top: 8px; left: 14px; }
+.vault-boy .pixel-5 { top: 8px; left: 16px; }
+
+/* Left side */
+.vault-boy .pixel-6 { top: 10px; left: 6px; }
+.vault-boy .pixel-8 { top: 12px; left: 4px; }
+.vault-boy .pixel-10 { top: 14px; left: 4px; }
+.vault-boy .pixel-12 { top: 16px; left: 6px; }
+
+/* Right side */
+.vault-boy .pixel-7 { top: 10px; left: 18px; }
+.vault-boy .pixel-9 { top: 12px; left: 20px; }
+.vault-boy .pixel-11 { top: 14px; left: 20px; }
+.vault-boy .pixel-13 { top: 16px; left: 18px; }
+
+/* Bottom outline */
+.vault-boy .pixel-14 { top: 18px; left: 8px; }
+.vault-boy .pixel-15 { top: 18px; left: 10px; }
+.vault-boy .pixel-16 { top: 18px; left: 12px; }
+.vault-boy .pixel-17 { top: 18px; left: 14px; }
+.vault-boy .pixel-18 { top: 18px; left: 16px; }
+
+/* Eyes */
+.vault-boy .pixel-19 { 
+    top: 12px; 
+    left: 12px; 
+    background: var(--bg-color, #1a1a1a);
+    box-shadow: none;
+}
+
+.vault-boy .pixel-20 { 
+    top: 14px; 
+    left: 12px; 
+    background: var(--bg-color, #1a1a1a);
+    box-shadow: none;
+}
+
+/* Animation for the Vault Boy */
+@keyframes vault-boy-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 3px var(--primary-color));
+    }
+    50% { 
+        filter: drop-shadow(0 0 8px var(--primary-color));
+    }
+}
+
+.vault-boy {
+    animation: vault-boy-glow 4s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE VAULT BOY ===== */
+@media (max-width: 768px) {
+    .vault-boy {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.25rem;
+    }
+    
+    .vault-boy div {
+        width: 1.5px;
+        height: 1.5px;
+    }
+    
+    /* Adjust pixel positions for smaller screens */
+    .vault-boy .pixel-1 { top: 6px; left: 6px; }
+    .vault-boy .pixel-2 { top: 6px; left: 7.5px; }
+    .vault-boy .pixel-3 { top: 6px; left: 9px; }
+    .vault-boy .pixel-4 { top: 6px; left: 10.5px; }
+    .vault-boy .pixel-5 { top: 6px; left: 12px; }
+    
+    .vault-boy .pixel-6 { top: 7.5px; left: 4.5px; }
+    .vault-boy .pixel-7 { top: 7.5px; left: 13.5px; }
+    
+    .vault-boy .pixel-8 { top: 9px; left: 3px; }
+    .vault-boy .pixel-9 { top: 9px; left: 15px; }
+    
+    .vault-boy .pixel-10 { top: 10.5px; left: 3px; }
+    .vault-boy .pixel-11 { top: 10.5px; left: 15px; }
+    
+    .vault-boy .pixel-12 { top: 12px; left: 4.5px; }
+    .vault-boy .pixel-13 { top: 12px; left: 13.5px; }
+    
+    .vault-boy .pixel-14 { top: 13.5px; left: 6px; }
+    .vault-boy .pixel-15 { top: 13.5px; left: 7.5px; }
+    .vault-boy .pixel-16 { top: 13.5px; left: 9px; }
+    .vault-boy .pixel-17 { top: 13.5px; left: 10.5px; }
+    .vault-boy .pixel-18 { top: 13.5px; left: 12px; }
+    
+    .vault-boy .pixel-19 { top: 9px; left: 9px; }
+    .vault-boy .pixel-20 { top: 10.5px; left: 9px; }
+}
+
+@media (max-width: 480px) {
+    .vault-boy {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .vault-boy div {
+        width: 1.25px;
+        height: 1.25px;
+    }
+    
+    /* Further adjust for very small screens */
+    .vault-boy .pixel-1 { top: 5px; left: 5px; }
+    .vault-boy .pixel-2 { top: 5px; left: 6.25px; }
+    .vault-boy .pixel-3 { top: 5px; left: 7.5px; }
+    .vault-boy .pixel-4 { top: 5px; left: 8.75px; }
+    .vault-boy .pixel-5 { top: 5px; left: 10px; }
+    
+    .vault-boy .pixel-6 { top: 6.25px; left: 3.75px; }
+    .vault-boy .pixel-7 { top: 6.25px; left: 11.25px; }
+    
+    .vault-boy .pixel-8 { top: 7.5px; left: 2.5px; }
+    .vault-boy .pixel-9 { top: 7.5px; left: 12.5px; }
+    
+    .vault-boy .pixel-10 { top: 8.75px; left: 2.5px; }
+    .vault-boy .pixel-11 { top: 8.75px; left: 12.5px; }
+    
+    .vault-boy .pixel-12 { top: 10px; left: 3.75px; }
+    .vault-boy .pixel-13 { top: 10px; left: 11.25px; }
+    
+    .vault-boy .pixel-14 { top: 11.25px; left: 5px; }
+    .vault-boy .pixel-15 { top: 11.25px; left: 6.25px; }
+    .vault-boy .pixel-16 { top: 11.25px; left: 7.5px; }
+    .vault-boy .pixel-17 { top: 11.25px; left: 8.75px; }
+    .vault-boy .pixel-18 { top: 11.25px; left: 10px; }
+    
+    .vault-boy .pixel-19 { top: 7.5px; left: 7.5px; }
+    .vault-boy .pixel-20 { top: 8.75px; left: 7.5px; }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+.high-contrast .vault-boy div {
+    background: #ffffff;
+    box-shadow: 0 0 2px #ffffff;
+}
+
+.high-contrast .vault-boy .pixel-19,
+.high-contrast .vault-boy .pixel-20 {
+    background: #000000;
+    box-shadow: none;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .vault-boy {
+        animation: none;
+    }
+    
+    .vault-boy:hover {
+        transform: none;
+    }
+} 

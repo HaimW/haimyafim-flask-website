@@ -1,0 +1,317 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+    --primary-color: #00ff00;
+    --bg-color: #1a1a1a;
+    --bg-dark: #0a0a0a;
+    --text-color: #00ff00;
+    --accent-color: rgba(0, 255, 0, 0.05);
+    --border-color: #00ff00;
+    --glow-color: rgba(0, 255, 0, 0.3);
+    --transition-speed: 0.3s;
+    --font-main: 'Courier New', 'Lucida Console', monospace;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background: var(--bg-color);
+    line-height: 1.6;
+    text-align: left;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h2 {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+p {
+    margin: 1rem 0;
+}
+
+strong {
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+/* ===== HEADER ===== */
+header {
+    background: var(--bg-color);
+    border-bottom: 2px solid var(--border-color);
+    padding: 1rem;
+    animation: flicker 3s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px var(--glow-color);
+    min-height: 80px;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+    flex: 1;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--glow-color);
+    backdrop-filter: blur(5px);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    animation: scan 3s infinite;
+}
+
+.section:hover {
+    box-shadow: 0 0 25px var(--glow-color);
+    transform: translateY(-2px);
+}
+
+.terminal-output {
+    margin-top: 1rem;
+}
+
+.user-info, .contact-info, .projects-list {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 3px;
+}
+
+.status-active {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+/* ===== LINKS ===== */
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border-color);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    display: inline-block;
+}
+
+a:hover, a:focus {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border-bottom: 1px solid var(--primary-color);
+    padding: 2px 4px;
+    border-radius: 2px;
+    text-shadow: none;
+    transform: scale(1.05);
+}
+
+a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.contact-link {
+    font-weight: bold;
+}
+
+.contact-link::after {
+    content: ' ▶';
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.contact-link:hover::after {
+    opacity: 1;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: auto;
+    padding: 2rem 1rem;
+    border-top: 2px solid var(--border-color);
+    background: var(--bg-dark);
+    text-align: center;
+    position: relative;
+}
+
+.accessibility-note {
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+.accessibility-toggle {
+    border: none;
+    border-bottom: 1px dashed var(--primary-color);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
+        opacity: 1; 
+    }
+    20%, 24%, 55% { 
+        opacity: 0.8; 
+    }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+    font-weight: bold;
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode */
+body.high-contrast {
+    --primary-color: #ffffff;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .section {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+    
+    header {
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    h1 {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    
+    h2 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.25rem;
+    }
+    
+    .section {
+        padding: 0.75rem;
+        margin: 0.75rem 0;
+    }
+    
+    .user-info, .contact-info, .projects-list {
+        padding: 0.75rem;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    header, footer {
+        background: white;
+        border-color: black;
+    }
+    
+    .section {
+        border-color: black;
+        box-shadow: none;
+        background: white;
+    }
+    
+    .blink {
+        animation: none;
+    }
+    
+    .vault-boy {
+        display: none;
+    }
+} 

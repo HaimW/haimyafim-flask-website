@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - System Malfunction{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section" aria-labelledby="error-heading">
+        <h2 id="error-heading">> CRITICAL ERROR 500: SYSTEM MALFUNCTION</h2>
+        <div class="terminal-output">
+            <p>VAULT-TEC SYSTEM DIAGNOSTIC... <span class="blink" aria-hidden="true">_</span></p>
+            <p class="error-text">> CRITICAL: INTERNAL SERVER ERROR DETECTED</p>
+            <p>> TIMESTAMP: {{ terminal_time() }}</p>
+            <p>> ERROR ID: {{ request.url|hash }}</p>
+            
+            <div class="error-container">
+                <div class="ascii-art">
+                    <pre>
+    ☢️  RADIATION WARNING  ☢️
+    
+    ╔══════════════════════╗
+    ║  SYSTEM MALFUNCTION  ║
+    ║                      ║
+    ║    PLEASE STAND BY   ║
+    ║   WHILE TECHNICIANS  ║
+    ║   RESTORE FUNCTION   ║
+    ╚══════════════════════╝
+                    </pre>
+                </div>
+                
+                <div class="error-message">
+                    <p><strong>> SYSTEM STATUS:</strong></p>
+                    <div class="status-report">
+                        <div class="status-line">
+                            <span>POWER CORE:</span> <span class="status-warning">UNSTABLE</span>
+                        </div>
+                        <div class="status-line">
+                            <span>DATABASE:</span> <span class="status-error">ERROR</span>
+                        </div>
+                        <div class="status-line">
+                            <span>COOLING SYSTEM:</span> <span class="status-warning">DEGRADED</span>
+                        </div>
+                        <div class="status-line">
+                            <span>BACKUP POWER:</span> <span class="status-ok">ONLINE</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-actions">
+                    <p><strong>> EMERGENCY PROTOCOLS:</strong></p>
+                    <ul class="protocol-list">
+                        <li>• Vault engineers have been automatically notified</li>
+                        <li>• Backup systems are maintaining basic functionality</li>
+                        <li>• Estimated repair time: 15-30 minutes</li>
+                        <li>• Please try again in a few moments</li>
+                    </ul>
+                    
+                    <div class="action-buttons">
+                        <a href="{{ url_for('main.index') }}" class="terminal-submit">Return to Safety</a>
+                        <a href="{{ url_for('main.contact') }}" class="terminal-submit">Emergency Contact</a>
+                        <a href="javascript:location.reload()" class="terminal-submit">Retry Operation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add emergency system effects
+document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('.section');
+    
+    // Simulate system instability with random effects
+    let glitchInterval = setInterval(() => {
+        section.classList.add('glitch');
+        setTimeout(() => {
+            section.classList.remove('glitch');
+        }, 300);
+    }, 2000 + Math.random() * 3000);
+    
+    // Add warning sounds simulation (visual only)
+    const statusLines = document.querySelectorAll('.status-line');
+    statusLines.forEach(line => {
+        if (line.textContent.includes('ERROR') || line.textContent.includes('UNSTABLE')) {
+            line.style.animation = 'emergency-blink 1s infinite';
+        }
+    });
+    
+    // Auto-reload suggestion after 30 seconds
+    setTimeout(() => {
+        const reloadBtn = document.querySelector('[href*="reload"]');
+        if (reloadBtn) {
+            reloadBtn.style.animation = 'pulse 1s infinite';
+            reloadBtn.innerHTML = '🔄 Systems Ready - Retry Operation';
+        }
+    }, 30000);
+});
+</script>
+
+<style>
+.error-text {
+    color: #ff4444 !important;
+    text-shadow: 0 0 10px #ff4444 !important;
+}
+
+.status-report {
+    font-family: var(--font-main);
+    margin: 1rem 0;
+}
+
+.status-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+.status-ok { color: #00ff00; }
+.status-warning { color: #ffaa00; }
+.status-error { color: #ff4444; text-shadow: 0 0 5px #ff4444; }
+
+@keyframes emergency-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+</style>
+{% endblock %} 

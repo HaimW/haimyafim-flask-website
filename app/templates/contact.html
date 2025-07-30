@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - Secure Communication{% endblock %}
+
+{% block meta_description %}Send a secure message to Haim Yafim through the Vault-Tec terminal interface{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section" aria-labelledby="contact-form-heading">
+        <h2 id="contact-form-heading">> SECURE COMMUNICATION TERMINAL</h2>
+        <div class="terminal-output">
+            <p>INITIALIZING SECURE CHANNEL... <span class="blink" aria-hidden="true">_</span></p>
+            <p>> ENCRYPTION: VAULT-TEC PROTOCOL ENABLED</p>
+            <p>> STATUS: READY FOR TRANSMISSION</p>
+            
+            <div class="contact-form-container">
+                <form method="POST" class="terminal-form">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        {{ form.name.label(class="terminal-label") }}
+                        {{ form.name(class="terminal-input", placeholder="Enter operative identification...") }}
+                        {% if form.name.errors %}
+                            <div class="error-messages">
+                                {% for error in form.name.errors %}
+                                <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.email.label(class="terminal-label") }}
+                        {{ form.email(class="terminal-input", placeholder="Enter communication frequency...") }}
+                        {% if form.email.errors %}
+                            <div class="error-messages">
+                                {% for error in form.email.errors %}
+                                <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.subject.label(class="terminal-label") }}
+                        {{ form.subject(class="terminal-select") }}
+                        {% if form.subject.errors %}
+                            <div class="error-messages">
+                                {% for error in form.subject.errors %}
+                                <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.message.label(class="terminal-label") }}
+                        {{ form.message(class="terminal-textarea", rows="8", placeholder="Enter message payload...\n\nExample:\n> Greetings from the wasteland!\n> I am interested in discussing...\n> Please advise on...") }}
+                        {% if form.message.errors %}
+                            <div class="error-messages">
+                                {% for error in form.message.errors %}
+                                <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Honeypot for spam protection -->
+                    <div style="display: none;">
+                        {{ form.honeypot() }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.submit(class="terminal-submit") }}
+                    </div>
+                </form>
+                
+                <div class="transmission-info">
+                    <p><strong>> TRANSMISSION PROTOCOLS:</strong></p>
+                    <ul class="protocol-list">
+                        <li>• All transmissions are encrypted using Vault-Tec security protocols</li>
+                        <li>• Response time: 24-48 hours (depending on radiation levels)</li>
+                        <li>• Emergency communications: Use COMM frequency above</li>
+                        <li>• Message retention: 30 days in secure archives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="alt-contact-heading">
+        <h2 id="alt-contact-heading">> ALTERNATIVE PROTOCOLS</h2>
+        <div class="terminal-output">
+            <p>BACKUP COMMUNICATION CHANNELS... <span class="blink" aria-hidden="true">_</span></p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="pixel-icon email-icon" aria-hidden="true">
+                        {% for i in range(10) %}<div></div>{% endfor %}
+                    </div>
+                    <strong>DIRECT COMM:</strong> <a href="mailto:haim.yafim@example.com" class="contact-link">haim.yafim@example.com</a>
+                </div>
+                <div class="contact-item">
+                    <div class="pixel-icon x-icon" aria-hidden="true"></div>
+                    <strong>X-NET:</strong> <a href="https://x.com/haimyafim" target="_blank" rel="noopener noreferrer" class="contact-link">@haimyafim</a>
+                </div>
+                <div class="contact-item">
+                    <div class="pixel-icon linkedin-icon" aria-hidden="true"></div>
+                    <strong>PROF-NET:</strong> <a href="https://linkedin.com/in/haimyafim" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Enhanced form interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.terminal-form');
+    const inputs = form.querySelectorAll('.terminal-input, .terminal-textarea, .terminal-select');
+    
+    // Add terminal-style focus effects
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.boxShadow = '0 0 10px var(--primary-color)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.boxShadow = '';
+        });
+        
+        // Typing sound effect (visual only)
+        input.addEventListener('input', function() {
+            this.style.borderColor = 'var(--primary-color)';
+            setTimeout(() => {
+                this.style.borderColor = '';
+            }, 100);
+        });
+    });
+    
+    // Form submission effect
+    form.addEventListener('submit', function(e) {
+        const submitBtn = form.querySelector('.terminal-submit');
+        submitBtn.textContent = '> TRANSMITTING...';
+        submitBtn.disabled = true;
+    });
+});
+</script>
+{% endblock %} 

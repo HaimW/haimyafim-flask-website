@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.SITE_NAME }} - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section" aria-labelledby="about-heading">
+        <h2 id="about-heading">> ABOUT USER</h2>
+        <div class="terminal-output">
+            <p>INITIALIZING... <span class="blink" aria-hidden="true">_</span></p>
+            <div class="user-info">
+                <p><strong>USER:</strong> Haim Yafim<br>
+                   <strong>STATUS:</strong> <span class="status-active">Active</span><br>
+                   <strong>BIO:</strong> Greetings from Vault 101! I'm Haim Yafim, a Wasteland Developer and Vault Dweller. My mission is to explore tech ruins, retro coding, and post-apocalyptic digital art. Accessing this terminal grants you insight into my data logs.</p>
+            </div>
+            <div class="mantra-container">
+                <p><strong>MANTRA:</strong></p>
+                <div class="mantra-text" id="mantra-text" aria-live="polite">
+                    <span class="typing-cursor" aria-hidden="true">_</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">> CONTACT PROTOCOLS</h2>
+        <div class="terminal-output">
+            <p>ESTABLISHING CONNECTION... <span class="blink" aria-hidden="true">_</span></p>
+            <div class="contact-info">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="pixel-icon email-icon" aria-hidden="true">
+                            {% for i in range(10) %}<div></div>{% endfor %}
+                        </div>
+                        <strong>COMM:</strong> <a href="mailto:haim.yafim@example.com" class="contact-link" aria-label="Send email to Haim Yafim">haim.yafim@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="pixel-icon x-icon" aria-hidden="true"></div>
+                        <strong>X-NET:</strong> <a href="https://x.com/haimyafim" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Visit Haim Yafim's X profile (opens in new tab)">@haimyafim</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="pixel-icon linkedin-icon" aria-hidden="true"></div>
+                        <strong>PROF-NET:</strong> <a href="https://linkedin.com/in/haimyafim" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Visit Haim Yafim's LinkedIn profile (opens in new tab)">LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="pixel-icon terminal-icon" aria-hidden="true"></div>
+                        <strong>SECURE-COMM:</strong> <a href="{{ url_for('main.contact') }}" class="contact-link" aria-label="Open secure terminal communication form">Terminal Contact Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">> PROJECT LOGS</h2>
+        <div class="terminal-output">
+            <p>SCANNING ARCHIVES... <span class="blink" aria-hidden="true">_</span></p>
+            <div class="projects-list">
+                <div class="project-item">
+                    <p><strong>> VAULT TERMINAL INTERFACE</strong></p>
+                    <p>Status: OPERATIONAL | A cyberpunk-themed personal website with Matrix effects, Fallout aesthetics, and Flask backend.</p>
+                    <p>Tech: Python Flask, HTML5, CSS3, JavaScript, SQLite</p>
+                </div>
+                <div class="project-item">
+                    <p><strong>> FUTURE PROJECTS</strong></p>
+                    <p>Status: PLANNED | Additional portfolio items and experiments will be documented here.</p>
+                    <p>// Expand this section with your actual projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="api-heading">
+        <h2 id="api-heading">> SYSTEM APIS</h2>
+        <div class="terminal-output">
+            <p>AVAILABLE ENDPOINTS... <span class="blink" aria-hidden="true">_</span></p>
+            <div class="api-list">
+                <div class="api-item">
+                    <p><strong>GET</strong> <a href="{{ url_for('main.api_status') }}" class="contact-link">/api/status</a> - System status and uptime information</p>
+                </div>
+                <div class="api-item">
+                    <p><strong>GET</strong> <a href="{{ url_for('main.api_stats') }}" class="contact-link">/api/stats</a> - Site statistics and visitor analytics</p>
+                </div>
+                <div class="api-item">
+                    <p><strong>GET</strong> <a href="{{ url_for('main.api_mantra') }}" class="contact-link">/api/mantra</a> - Random inspirational mantra</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add some dynamic stats loading
+document.addEventListener('DOMContentLoaded', function() {
+    // Load live stats
+    fetch('/api/stats')
+        .then(response => response.json())
+        .then(data => {
+            console.log('> Site stats loaded:', data);
+        })
+        .catch(error => console.log('> Stats loading failed:', error));
+});
+</script>
+{% endblock %} 
