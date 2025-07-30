@@ -119,6 +119,61 @@ def admin():
             flash('> ACCESS DENIED: Invalid access code', 'error')
         return render_template('admin_login.html', form=form)
     
+    # Handle admin actions
+    action = request.args.get('action')
+    message_id = request.args.get('id')
+    
+    if action and message_id:
+        try:
+            message = ContactMessage.query.get_or_404(message_id)
+            if action == 'mark_read':
+                message.is_read = True
+                db.session.commit()
+                flash('> TRANSMISSION MARKED AS READ', 'success')
+                # Redirect back to admin panel to avoid reprocessing on refresh
+                return redirect(url_for('main.admin', code='vault101'))
+            elif action == 'mark_unread':
+                message.is_read = False
+                db.session.commit()
+                flash('> TRANSMISSION MARKED AS UNREAD', 'success')
+                # Redirect back to admin panel to avoid reprocessing on refresh
+                return redirect(url_for('main.admin', code='vault101'))
+            elif action == 'view':
+                # Mark as read when viewing
+                if not message.is_read:
+                    message.is_read = True
+                    db.session.commit()
+                
+                # Get site statistics for the view
+                stats = SiteStats.get_or_create()
+                recent_visitors = Visitor.query.order_by(Visitor.timestamp.desc()).limit(20).all()
+                messages = ContactMessage.query.order_by(ContactMessage.timestamp.desc()).all()
+                
+                # Get visitor stats for last 7 days (same as regular admin view)
+                week_ago = datetime.utcnow() - timedelta(days=7)
+                daily_stats = {}
+                for i in range(7):
+                    day = week_ago + timedelta(days=i)
+                    day_start = day.replace(hour=0, minute=0, second=0, microsecond=0)
+                    day_end = day_start + timedelta(days=1)
+                    
+                    count = Visitor.query.filter(
+                        Visitor.timestamp >= day_start,
+                        Visitor.timestamp < day_end
+                    ).count()
+                    
+                    daily_stats[day.strftime('%Y-%m-%d')] = count
+                
+                return render_template('admin.html',
+                                     stats=stats,
+                                     recent_visitors=recent_visitors,
+                                     messages=messages,
+                                     daily_stats=daily_stats,
+                                     view_message=message)  # Pass the message to view
+        except Exception as e:
+            flash(f'> ERROR: Could not access transmission - {str(e)}', 'error')
+            return redirect(url_for('main.admin', code='vault101'))
+    
     # Get site statistics
     stats = SiteStats.get_or_create()
     recent_visitors = Visitor.query.order_by(Visitor.timestamp.desc()).limit(20).all()
@@ -143,7 +198,8 @@ def admin():
                          stats=stats,
                          recent_visitors=recent_visitors,
                          messages=messages,
-                         daily_stats=daily_stats)
+                         daily_stats=daily_stats,
+                         view_message=None)
 
 @main.route('/api/status')
 def api_status():

@@ -312,4 +312,79 @@
         align-items: flex-start;
         gap: 0.25rem;
     }
+}
+
+/* Message Detail View Styles */
+.message-detail {
+    background: rgba(0, 20, 40, 0.8);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.message-full-header {
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.message-info {
+    margin: 8px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.detail-label {
+    color: var(--primary-color);
+    font-weight: bold;
+    min-width: 150px;
+    display: inline-block;
+}
+
+.message-text {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    padding: 15px;
+    margin-top: 10px;
+    font-family: 'Courier New', monospace;
+    color: var(--primary-color);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.message-full-content {
+    margin: 15px 0;
+}
+
+.message-full-actions {
+    border-top: 1px solid var(--primary-color);
+    padding-top: 15px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.message-full-actions a {
+    margin: 0 10px;
+}
+
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.status-badge.read {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+}
+
+.status-badge.unread {
+    background: rgba(255, 255, 0, 0.2);
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
 } 

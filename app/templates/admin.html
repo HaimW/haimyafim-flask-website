@@ -74,9 +74,53 @@
                 </div>
             </div>
 
+            <!-- View Full Message (if viewing specific message) -->
+            {% if view_message %}
+            <div class="admin-section">
+                <h3>> TRANSMISSION DETAILS</h3>
+                <div class="message-detail">
+                    <div class="message-full-header">
+                        <div class="message-info">
+                            <span class="detail-label">OPERATIVE:</span> {{ view_message.name }}
+                        </div>
+                        <div class="message-info">
+                            <span class="detail-label">FREQUENCY:</span> {{ view_message.email }}
+                        </div>
+                        <div class="message-info">
+                            <span class="detail-label">TRANSMISSION TYPE:</span> {{ view_message.subject }}
+                        </div>
+                        <div class="message-info">
+                            <span class="detail-label">TIMESTAMP:</span> {{ view_message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+                        </div>
+                        <div class="message-info">
+                            <span class="detail-label">SOURCE IP:</span> {{ view_message.ip_address or 'UNKNOWN' }}
+                        </div>
+                        <div class="message-info">
+                            <span class="detail-label">STATUS:</span> 
+                            <span class="status-badge {% if view_message.is_read %}read{% else %}unread{% endif %}">
+                                {% if view_message.is_read %}READ{% else %}UNREAD{% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="message-full-content">
+                        <span class="detail-label">MESSAGE PAYLOAD:</span>
+                        <div class="message-text">{{ view_message.message }}</div>
+                    </div>
+                    <div class="message-full-actions">
+                        <a href="{{ url_for('main.admin', code=request.args.get('code')) }}" class="terminal-submit">Return to List</a>
+                        {% if view_message.is_read %}
+                        <a href="{{ url_for('main.admin', code=request.args.get('code'), action='mark_unread', id=view_message.id) }}" class="admin-link">Mark Unread</a>
+                        {% else %}
+                        <a href="{{ url_for('main.admin', code=request.args.get('code'), action='mark_read', id=view_message.id) }}" class="admin-link">Mark Read</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Contact Messages -->
             <div class="admin-section">
-                <h3>> INCOMING TRANSMISSIONS</h3>
+                <h3>{% if view_message %}> ALL TRANSMISSIONS{% else %}> INCOMING TRANSMISSIONS{% endif %}</h3>
                 <div class="message-list">
                     {% for message in messages[:10] %}
                     <div class="message-item {% if not message.is_read %}unread{% endif %}">
@@ -91,6 +135,8 @@
                         <div class="message-actions">
                             {% if not message.is_read %}
                             <a href="{{ url_for('main.admin', code=request.args.get('code'), action='mark_read', id=message.id) }}" class="admin-link">Mark Read</a>
+                            {% else %}
+                            <a href="{{ url_for('main.admin', code=request.args.get('code'), action='mark_unread', id=message.id) }}" class="admin-link">Mark Unread</a>
                             {% endif %}
                             <a href="{{ url_for('main.admin', code=request.args.get('code'), action='view', id=message.id) }}" class="admin-link">View Full</a>
                         </div>
